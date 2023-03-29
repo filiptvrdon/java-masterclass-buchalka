@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hbox.HelloController">
+    <top>
+        <Label text="Hello There At The Top"
+        BorderPane.alignment="CENTER"/>
+    </top>
+    <left>
+            <Label text="Hello There On The Left"/>
+    </left>
+    <center>
+        <Label text="Hello There At The Centeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeer"/>
+    </center>
+    <right>
+        <Label text="Hello There On The Right"/>
+    </right>
+    <bottom>
+        <HBox spacing="5" alignment="top_right">
+            <padding>
+                <Insets bottom="10" right="10"/>
+            </padding>
+            <Label fx:id="welcomeText"/>
+            <Button text="Okay"></Button>
+            <Button text="Cancel"></Button>
+            <Button text="Help"></Button>
+        </HBox>
+    </bottom>
+</BorderPane>

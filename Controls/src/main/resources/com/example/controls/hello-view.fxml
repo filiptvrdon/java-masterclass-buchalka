@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Accordion?>
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.controls.HelloController">
+    <Label fx:id="welcomeText"/>
+    <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="Hello!" onAction="#onHelloButtonClick">
+        <graphic>
+            <ImageView>
+                <Image url="@/toolbarButtonGraphics/general/TipOfTheDay24.gif"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" text="Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui."
+           textFill="blue" WrapText="true">
+        <font>
+            <Font name="Arial italic" size="12"/>
+        </font>
+        <graphic>
+            <ImageView>
+                <Image url="@/toolbarButtonGraphics/general/Information24.gif"/>
+            </ImageView>
+        </graphic>
+    </Label>
+    <fx:define>
+        <ToggleGroup fx:id="colorToggleGroup"/>
+    </fx:define>
+    <RadioButton GridPane.rowIndex="0" GridPane.columnIndex="2" text="red" toggleGroup="$colorToggleGroup"/>
+    <RadioButton GridPane.rowIndex="0" GridPane.columnIndex="3" text="blue" toggleGroup="$colorToggleGroup" selected="true"/>
+    <RadioButton GridPane.rowIndex="0" GridPane.columnIndex="4" text="green" toggleGroup="$colorToggleGroup"/>
+
+    <CheckBox GridPane.rowIndex="2" GridPane.columnIndex="0" text="Subscribe"/>
+
+    <ToggleButton GridPane.rowIndex="0" GridPane.columnIndex="5"/>
+
+    <TextField GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <PasswordField GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="3" GridPane.columnSpan="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Option 1"/>
+                <String fx:value="Option 2"/>
+                <String fx:value="Option 3"/>
+                <String fx:value="Option 4"/>
+                <String fx:value="Option 5"/>
+            </FXCollections>
+        </items>
+        <value>
+            <String fx:value="Please, select an option from below"/>
+        </value>
+    </ComboBox>
+    <ChoiceBox GridPane.rowIndex="2" GridPane.columnIndex="4" GridPane.columnSpan="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Option 1"/>
+                <String fx:value="Option 2"/>
+                <String fx:value="Option 3"/>
+                <String fx:value="Option 4"/>
+                <String fx:value="Option 5"/>
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+    <Slider GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="4" min="0" max="100"
+        showTickLabels="true" showTickMarks="true" minorTickCount="4" snapToTicks="true"/>
+    <Spinner GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2" min="0" max="100" editable="true" initialValue="50"/>
+    <ColorPicker GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <DatePicker GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Accordion GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <panes>
+            <TitledPane text="Titled pane">
+                <Label text="Label 1"/>
+            </TitledPane>
+            <TitledPane text="Titled pane">
+                <Label text="Label 2"/>
+            </TitledPane>
+            <TitledPane text="Titled pane">
+                <Label text="Label 3"/>
+            </TitledPane>
+        </panes>
+    </Accordion>
+</GridPane>

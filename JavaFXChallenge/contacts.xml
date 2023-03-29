@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contacts>
+<contact>
+	<first_name>john</first_name>
+	<last_name>deere</last_name>
+	<phone_number>+8765456</phone_number>
+	<notes>lkjh</notes>
+</contact>
+<contact>
+	<first_name>jane</first_name>
+	<last_name>doe</last_name>
+	<phone_number>+87654</phone_number>
+	<notes>asfaf</notes>
+</contact>
+</contacts>

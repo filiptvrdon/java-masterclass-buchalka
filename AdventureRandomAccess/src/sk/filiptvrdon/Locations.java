@@ -3,20 +3,48 @@ package sk.filiptvrdon;
 import java.io.*;
 import java.util.*;
 
-/**
- *
- *
- */
 public class Locations implements Map<Integer, Location> {
     private static final Map<Integer, Location> locations = new LinkedHashMap<>();
+    private static Map <Integer, IndexRecord> index = new LinkedHashMap<>();
 
     public static void main (String[] args) throws IOException {
-        try (ObjectOutputStream locFile = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("locations.dat")))){
+        try (RandomAccessFile rao = new RandomAccessFile("locations_rand.dat", "rwd")){
+            rao.writeInt(locations.size());
+            int indexSize = locations.size() * 3 * Integer.BYTES;
+            int locationStart = (int) (indexSize + rao.getFilePointer() + Integer.BYTES);
+            rao.writeInt(locationStart);
+
+            long indexStart = rao.getFilePointer();
+
+            int startPointer = locationStart;
+            rao.seek(startPointer);
+
             for (Location location : locations.values()){
-                locFile.writeObject(location);
+                rao.writeInt(location.getLocationID());
+                rao.writeUTF(location.getDescription());
+                StringBuilder builder = new StringBuilder();
+
+                for (String direction : location.getExits().keySet()){
+                    if (!direction.equalsIgnoreCase("Q")){
+                        builder.append(direction);
+                        builder.append(",");
+                        builder.append(location.getExits().get(direction));
+                        builder.append(",");
+                    }
+                }
+                rao.writeUTF(builder.toString());
+                IndexRecord record = new IndexRecord(startPointer, (int) (rao.getFilePointer() - startPointer));
+                index.put(location.getLocationID(), record);
+
+                startPointer = (int) rao.getFilePointer();
             }
+
+
         }
+
+
     }
+
     // BUILDING AN INDEX
     // 1. This first four bytes will contain the number of locations (bytes 0-3)
     // 2. The next four bytes will contain the start offset of the locations section (bytes 4-7)

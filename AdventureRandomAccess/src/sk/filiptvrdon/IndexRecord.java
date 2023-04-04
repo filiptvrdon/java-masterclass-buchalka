@@ -24,4 +24,13 @@ public class IndexRecord {
     public void setLength(int length) {
         this.length = length;
     }
+
+    @Override
+    public String toString() {
+        return "IndexRecord{" +
+                "startByte=" + startByte +
+                ", length=" + length +
+                '}';
+    }
 }
+

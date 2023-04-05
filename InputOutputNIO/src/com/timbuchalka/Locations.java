@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLOutput;
 import java.util.*;
 
 /**
@@ -43,6 +44,21 @@ public class Locations implements Map<Integer, Location> {
                 String description = scanner.nextLine();
                 System.out.println("Imported loc: " + loc + ": " + description);
                 locations.put(loc, new Location(loc, description, null));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedReader dirFile = Files.newBufferedReader(dirPath)){
+            String input;
+            while ((input = dirFile.readLine()) != null){
+                String[] data = input.split(",");
+                int loc = Integer.parseInt(data[0]);
+                String direction = data[1];
+                int destination = Integer.parseInt(data[2]);
+                System.out.println(loc + ": " + direction + ": " + destination);
+                Location location = locations.get(loc);
+                location.addExit(direction, destination);
             }
         } catch (IOException e) {
             e.printStackTrace();

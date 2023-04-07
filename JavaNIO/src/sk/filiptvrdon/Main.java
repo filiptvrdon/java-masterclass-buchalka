@@ -14,7 +14,6 @@ public class Main {
 
         try {
             Path dataPath = FileSystems.getDefault().getPath("data.txt");
-            // Files.write(dataPath, "\nLine 5".getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
             Files.writeString(dataPath, "\nLine 5", StandardOpenOption.APPEND);
 
 

@@ -19,22 +19,29 @@ public class MyConsumer implements Runnable {
 
     @Override
     public void run() {
+        int counter = 0;
         while (true) {
-            bufferLock.lock();
-            if (buffer.isEmpty()) {
-                bufferLock.unlock();
-                continue;
-            }
+            if (bufferLock.tryLock()) {
+                try {
+                    if (buffer.isEmpty()) {
+                        continue;
+                    }
+                    System.out.println(color + "The counter = " + counter);
+                    counter = 0;
 
-            if (buffer.get(0).equals(EOF)) {
-                System.out.println(color + "Exiting");
-                bufferLock.unlock();
-                break;
+                    if (buffer.get(0).equals(EOF)) {
+                        System.out.println(color + "Exiting");
+                        break;
+                    } else {
+                        String removedString = buffer.remove(0);
+                        System.out.println(color + "Removed " + removedString);
+                    }
+                } finally {
+                    bufferLock.unlock();
+                }
             } else {
-                String removedString = buffer.remove(0);
-                System.out.println(color + "Removed " + removedString);
+                counter++;
             }
-            bufferLock.unlock();
         }
     }
 }

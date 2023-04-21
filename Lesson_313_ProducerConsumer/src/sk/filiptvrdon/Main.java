@@ -21,7 +21,7 @@ public class Main {
         executorService.execute(consumer1);
         executorService.execute(consumer2);
 
-        Future<String> future = executorService.submit(new Callable<String>() {
+        Future<String> f+uture = executorService.submit(new Callable<String>() {
             @Override
             public String call() throws Exception {
                 System.out.println(ThreadColor.ANSI_RED + "I'm being printed from the callable class");

@@ -36,15 +36,10 @@ public class HelloController {
                         "Mary Johnson",
                         "Bob McDonald"
                 );
-                Platform.runLater((new Runnable() {
-                    @Override
-                    public void run() {
-                        listView.setItems(employees);
-                        welcomeText.setText("Welcome!");
-                    }
-                }));
                 return employees;
             }
         };
+        listView.itemsProperty().bind(task.valueProperty());
+
     }
 }

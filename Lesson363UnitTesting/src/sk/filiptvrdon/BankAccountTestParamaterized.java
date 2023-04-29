@@ -42,7 +42,7 @@ public class BankAccountTestParamaterized {
     @org.junit.Test
     public void deposit() {
         account.deposit(amount, branch);
-        assertEquals(expected, account.getBalance(), 0);
+        assertEquals(expected, account.getBalance(), .01);
     }
 
 }

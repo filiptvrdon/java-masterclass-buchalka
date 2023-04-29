@@ -1,6 +1,6 @@
 package sk.filiptvrdon;
-
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,24 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilitiesTest {
     Utilities util = new Utilities();
 
-    @org.junit.BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         System.out.println("This executes before any test cases. Count = ");
     }
-
-    @org.junit.Before
+    @BeforeEach
     public void setup() {
         System.out.println("Running a test...");
         util = new Utilities();
     }
 
-
-
-
-
     @Test
     void everyNthChar() {
-        fail("This test has yet to be implemented");
+        char[] output = util.everyNthChar(new char[] {'h', 'e', 'l', 'l', 'o'}, 2);
+        assertArrayEquals(new char[] {'e', 'l'}, output);
+
+        char[] output2 = util.everyNthChar(new char[] {'h', 'e', 'l', 'l', 'o'}, 8);
+        assertArrayEquals(new char[] {'h', 'e', 'l', 'l', 'o'}, output2);
     }
 
     @Test
@@ -42,11 +41,17 @@ class UtilitiesTest {
 
     @Test
     void converter() {
-        fail("This test has yet to be implemented");
+        assertEquals(300, util.converter(10, 5));
+    }
+
+    @Test
+    void converter_arithmeticException() {
+        assertThrows(ArithmeticException.class, () -> util.converter(10, 0));
     }
 
     @Test
     void nullIfOddLength() {
-        fail("This test has yet to be implemented");
+        assertNull(util.nullIfOddLength("odd"));
+        assertNotNull(util.nullIfOddLength("even"));
     }
 }

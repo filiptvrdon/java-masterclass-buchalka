@@ -3,22 +3,34 @@ package sk.filiptvrdon;
 import java.sql.*;
 
 public class Main {
-    public static String url = "jdbc:sqlite:C:/Users/Filip/Documents/SQLite/test.db";
+
+    public static final String DB_NAME = "test.db";
+    public static final String CONNECTION_STRING = "jdbc:sqlite:C:/Users/Filip/Documents/SQLite/" + DB_NAME;
+
+    public static final String TABLE_CONTACTS = "contacts";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_EMAIL = "email";
+
     public static void main(String[] args) {
 
-        try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement()){
-            statement.execute("CREATE TABLE IF NOT EXISTS contacts (name TEXT, phone INTEGER, email TEXT)");
-//            statement.execute("INSERT INTO contacts (name, phone, email) VALUES ('Filip', 123456789, 'tvrdon.filip@gmail.com')");
-//            statement.execute("INSERT INTO contacts (name, phone, email) VALUES ('John', 987654321, 'john@email.com')");
-//            statement.execute("INSERT INTO contacts (name, phone, email) VALUES ('Jane', 65765759, 'jane@email.com')");
+        try (Connection connection = DriverManager.getConnection(CONNECTION_STRING);
+             Statement statement = connection.createStatement()) {
 
+            statement.execute("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+            statement.execute("CREATE TABLE IF NOT EXISTS " + TABLE_CONTACTS + " (" +
+                    COLUMN_NAME + " text, " +
+                    COLUMN_PHONE + " integer, " +
+                    COLUMN_EMAIL + " text" +
+                    ")");
 
-//            statement.execute("SELECT * FROM contacts");
-//            ResultSet results = statement.getResultSet();
+            insertContact("Filip", "123456789", "filip@email.com");
+            insertContact("John", "87652442424", "john@email.com");
+            insertContact("Jane", "8765672424", "jane@email.com");
 
             ResultSet results = statement.executeQuery("SELECT * FROM contacts");
-            while(results.next()) {
+            while (results.next()) {
                 System.out.println(results.getString("name") + " " +
                         results.getInt("phone") + " " +
                         results.getString("email"));
@@ -30,4 +42,17 @@ public class Main {
 
 
     }
+
+    private static void insertContact(String name, String phone, String email) throws SQLException {
+        try (Connection connection = DriverManager.getConnection(CONNECTION_STRING);
+             Statement statement = connection.createStatement()) {
+            statement.execute("INSERT INTO " + TABLE_CONTACTS +
+                    " (" + COLUMN_NAME + ", " +
+                    COLUMN_PHONE + ", " +
+                    COLUMN_EMAIL + ")" +
+                    "VALUES ('" + name + "', " + phone + ", '" + email + "')");
+        }
+    }
+
+
 }

@@ -10,6 +10,8 @@ public class Main {
     public static void main(String[] args) {
 
         try (Socket socket = new Socket("localhost", 5000)) {
+
+            socket.setSoTimeout(5000);
             BufferedReader echoes = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter stringToEcho = new PrintWriter(socket.getOutputStream(), true);
 
@@ -28,6 +30,8 @@ public class Main {
                 }
             } while (!echoString.equals("exit"));
 
+        } catch (java.net.SocketTimeoutException e) {
+            System.out.println("Socket timed out");
 
         } catch (Exception e) {
             System.out.println("Client exception " + e.getMessage());

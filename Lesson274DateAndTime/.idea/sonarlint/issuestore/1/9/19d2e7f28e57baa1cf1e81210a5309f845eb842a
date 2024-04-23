@@ -1,0 +1,7 @@
+
+L	java:S106"+Replace this use of System.out by a logger.(ûÛÏçùÿÿÿÿ8é¨ú®¾1
+G	java:S106"+Replace this use of System.out by a logger.(ÕÞÄâ8˜‡þ®¾1
+L	java:S106"+Replace this use of System.out by a logger.(Æ£ÓÛùÿÿÿÿ8˜‡þ®¾1
+L	java:S106"+Replace this use of System.out by a logger.(è§¾œüÿÿÿÿ8Å’ÿ®¾1
+R
+java:S1128"0Remove this unused import 'java.time.LocalDate'.(›‘¬èýÿÿÿÿ8ù¨ú®¾1
